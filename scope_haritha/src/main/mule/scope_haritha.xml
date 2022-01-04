@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="15949371-b3a7-499a-a953-7047b084e252" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="scope_harithaFlow" doc:id="36034060-5f2f-4efb-91b5-54bd7567db87" >
+		<http:listener doc:name="Listener" doc:id="41a7e41c-7e28-4147-a6e1-ed8fd62e6b4a" config-ref="HTTP_Listener_config" path="/scope"/>
+		<set-payload value='haritha' doc:name="Set Payload" doc:id="17653c12-3d35-4e7b-af81-3ab8adaaf66f" />
+	</flow>
+</mule>

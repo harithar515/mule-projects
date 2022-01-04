@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit-soap="http://www.mulesoft.org/schema/mule/apikit-soap" xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/apikit-soap http://www.mulesoft.org/schema/mule/apikit-soap/current/mule-apikit-soap.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="bc335dfb-de6c-4913-926d-5bf237345e71" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="project1Flow" doc:id="9585f3ee-36d1-41ed-8195-da6b3fd1f51c" >
+		<http:listener doc:name="Listener" doc:id="5a55bbcc-31ae-41b6-b2d1-dff367daeb43" config-ref="HTTP_Listener_config" path="/raise"/>
+		<flow-ref doc:name="Flow Reference" doc:id="6ac278c8-2b53-4018-9a8e-de79cdbca61d" name="project1Flow"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="1fab8859-17d4-4f21-9f52-b9331a801713" />
+	</flow>
+	<flow name="project1Flow2" doc:id="e4a9f136-1112-480e-94b5-cfaf4f7ce6cd" >
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="2e3cd85e-a82e-494b-8056-34414e07d99d" />
+	</flow>
+</mule>

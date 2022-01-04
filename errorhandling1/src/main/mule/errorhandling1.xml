@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4dc06d1f-5dd2-4880-921a-6cb0a1752e22" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="errorhandling1Flow" doc:id="b4d00abd-3557-4616-b357-7d4c5b5538fc" >
+		<http:listener doc:name="Listener" doc:id="33bf2641-b401-4731-85f3-8ba75d900670" config-ref="HTTP_Listener_config" path="/handling"/>
+		<logger level="INFO" doc:name="Logger" doc:id="d91e2b74-0088-47f4-b271-e56561de03e0" message="sucessfull"/>
+		<set-payload value="#[pay]" doc:name="Set Payload" doc:id="87f2379e-30d8-4a3b-82a4-085a4610d8a3" />
+		<logger level="INFO" doc:name="Logger" doc:id="7fe8d223-aef5-465e-8556-34a91342c0f2" message="sucessful"/>
+		<error-handler>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="1c6fb9d7-361d-437f-9e1f-a929a2624a8f" >
+				<set-payload value='#["on error propagate"]' doc:name="Set Payload" doc:id="1e92c00b-b926-40f5-bb67-cd9fb6b2b2cc" />
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>

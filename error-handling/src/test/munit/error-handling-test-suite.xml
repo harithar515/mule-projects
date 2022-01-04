@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="error-handling-test-suite.xml" />
+	<munit:test name="error-handling-test-suite-error-handlingFlow2Test" doc:id="a6ea23a4-87f5-43eb-8391-5ee1a277af26" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to error-handlingFlow2" doc:id="eb468dc9-fb9d-464b-8308-83a6cf334f11" name="error-handlingFlow2"/>
+		</munit:execution>
+	</munit:test>
+
+
+</mule>

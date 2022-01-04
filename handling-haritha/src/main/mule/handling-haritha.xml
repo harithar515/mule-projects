@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="108451f3-eb02-4dca-acb8-f433eb6ba37b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="e7e44e88-8b91-451a-af1e-1a73de561664" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="ac73512a-673f-4760-8cd5-5d34919abacf" >
+		<http:request-connection host="8081" />
+	</http:request-config>
+	<flow name="handling-harithaFlow" doc:id="e76dad9b-f372-405a-869f-4ec745013e93" >
+		<http:listener doc:name="Listener" doc:id="87bc8e3c-6c73-4d6b-aa94-57704d159cb5" config-ref="HTTP_Listener_config" path="/error"/>
+		<set-payload value='#["before flow reference"]' doc:name="Set Payload" doc:id="48d07697-31a0-46ab-9cca-6c210921f3e3" />
+		<flow-ref doc:name="Flow Reference" doc:id="cc6c8db6-7ade-4342-bb27-3b4e90b0e9b2" name="handling-harithaFlow"/>
+		<set-payload value='#["after flow reference"]' doc:name="Set Payload" doc:id="1c4743de-da5d-4ea7-8268-fce3ceb58749" />
+		<error-handler>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="dafe9ed4-c8f5-4d77-a9b0-5bc5f18f1ea8" type="ANY">
+				<set-payload value="display" doc:name="Set Payload" doc:id="13fc8877-f0bd-4550-b187-b1294d0c77af" />
+			</on-error-continue>
+		</error-handler>
+	</flow>
+	<flow name="handling-harithaFlow3" doc:id="8ac36fa0-602e-41e6-bedb-6ea6467666c1" >
+		<set-payload value="#[pay]" doc:name="Set Payload" doc:id="57e3c7b3-05a7-4f01-8ff6-4e10d91228b2" />
+	</flow>
+	<flow name="handling-harithaFlow2" doc:id="53ad17ee-dcc6-42f0-bd7b-402dd42eb3e7" >
+		<http:listener doc:name="Listener" doc:id="c35c0959-34ca-453a-b045-0978a4c93324" config-ref="HTTP_Listener_config1" path="/error"/>
+		<flow-ref doc:name="Flow Reference" doc:id="57e0c33e-646e-4e2f-97c1-696efac80de4" name="handling-harithaFlow2"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="b373763c-3783-426a-b149-f781d56492a9" />
+	</flow>
+	<flow name="handling-harithaFlow1" doc:id="85a1a0f1-2039-4ccc-b577-b2e7c87bbc14" >
+		<http:request method="DELETE" doc:name="Request" doc:id="4baf6981-4948-434a-9190-c4f2d23ef75b" config-ref="HTTP_Request_configuration" path="http://calculator-webservice.mybluemix.net/calculator?wsdl"/>
+		<set-payload value='#["private flow"]' doc:name="Set Payload" doc:id="efd72e0d-1c9e-4464-8b94-794b31a49f36" />
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="ef18ee21-5e35-4c6b-9c9b-4bda32b4067f" type="ANY">
+				<set-payload value='#["error handled"]' doc:name="Set Payload" doc:id="6e5d774b-0cf0-4a09-99e7-d3c195bbd932" />
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>
